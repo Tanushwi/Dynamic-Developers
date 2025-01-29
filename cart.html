@@ -3,28 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - T-Mart</title>
-    <link rel="stylesheet" href="cart.css"> <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <title>Your Health Cart - MediCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        header .logo h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        header .logo p {
+            margin: 0;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        #cart {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        #cart h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #cart-items li .remove-btn {
+            cursor: pointer;
+            color: #e74c3c;
+        }
+
+        #cart-items li .remove-btn:hover {
+            color: #c0392b;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #27ae60;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #219150;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <h1>T-Mart</h1>
-                <p>Trendy Mart</p>
+                <h1>MediCare</h1>
+                <p>Your Health, Our Priority</p>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="electronicss.html">Electronics</a></li>
-                    <li><a href="menn.html">Men</a></li>
-                    <li><a href="women1.html">Women</a></li>
-                    <li><a href="kids.html">Kids</a></li>
-                    <li><a href="home-appliances.html">Home Appliances</a></li>
-                    <li><a href="sports.html">Sports</a></li>
-                    <li><a href="more.html">More</a></li>
+                    <li><a href="medicines.html">Medicines</a></li>
+                    <li><a href="consultation.html">Consultation</a></li>
+                    <li><a href="diagnostics.html">Diagnostics</a></li>
+                    <li><a href="healthcare.html">Health & Wellness</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
@@ -33,19 +153,80 @@
         </div>
     </header>
 
-    <section id="cart" class="container">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul> <!-- This is where the cart items will be displayed -->
-        <p>Total Price: ₹<span id="total-price">0</span></p> <!-- Total price will be shown here -->
+    <section id="cart">
+        <h2>Your Health Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total Cost: ₹<span id="total-price">0</span></p>
+        <button class="checkout-btn">Proceed to Checkout</button>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 T-Mart - Trendy Mart. All rights reserved.</p>
+            <p>&copy; 2024 MediCare. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Link to the cart.js file -->
-    <script src="cart.js"></script>
+    <script>
+        // Mock cart data
+        let healthCart = JSON.parse(localStorage.getItem('healthCart')) || [];
+        let totalPrice = 0;
+
+        // Display the cart and total price
+        function displayCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            const cartCountElement = document.getElementById('cart-count');
+
+            cartItemsElement.innerHTML = ''; 
+            totalPrice = 0; 
+
+            healthCart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${item.name} - ₹${item.price} 
+                    <i class="fas fa-trash remove-btn" data-index="${index}" title="Remove item"></i>
+                `;
+                cartItemsElement.appendChild(li);
+                totalPrice += item.price; 
+            });
+
+            if (totalPriceElement) totalPriceElement.textContent = totalPrice.toFixed(2);
+            if (cartCountElement) cartCountElement.textContent = healthCart.length;
+        }
+
+        // Remove an item from the cart
+        function removeFromCart(index) {
+            healthCart.splice(index, 1); 
+            localStorage.setItem('healthCart', JSON.stringify(healthCart)); 
+            displayCart(); 
+            updateCartCount(); 
+        }
+
+        // Update the cart count
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            cartCountElement.textContent = healthCart.length; 
+        }
+
+        // Event listener for removing items from cart
+        document.getElementById('cart-items')?.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-btn')) {
+                const index = e.target.getAttribute('data-index');
+                removeFromCart(index); 
+            }
+        });
+
+        // Example function to add items to the cart (you would call this when adding items in your system)
+        function addToCart(itemName, itemPrice) {
+            healthCart.push({ name: itemName, price: itemPrice });
+            localStorage.setItem('healthCart', JSON.stringify(healthCart));
+            displayCart();
+            updateCartCount();
+        }
+
+        // Initial display of cart and total
+        displayCart();
+        updateCartCount();
+    </script>
 </body>
 </html>
