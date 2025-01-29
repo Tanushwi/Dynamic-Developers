@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - T-Mart</title>
+    <link rel="stylesheet" href="cart.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>T-Mart</h1>
+                <p>Trendy Mart</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="electronicss.html">Electronics</a></li>
+                    <li><a href="menn.html">Men</a></li>
+                    <li><a href="women1.html">Women</a></li>
+                    <li><a href="kids.html">Kids</a></li>
+                    <li><a href="home-appliances.html">Home Appliances</a></li>
+                    <li><a href="sports.html">Sports</a></li>
+                    <li><a href="more.html">More</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="cart" class="container">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul> <!-- This is where the cart items will be displayed -->
+        <p>Total Price: ₹<span id="total-price">0</span></p> <!-- Total price will be shown here -->
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 T-Mart - Trendy Mart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Link to the cart.js file -->
+    <script src="cart.js"></script>
+</body>
+</html>
