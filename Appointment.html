@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #dfefff, #b2e2ff);
+            text-align: center;
+        }
+
+        .appointment-container {
+            background: rgba(255, 255, 255, 0.6); /* Increased transparency */
+            padding: 20px;
+            width: 30%; /* Reduced width */
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(0, 123, 255, 0.6); /* Highlight border */
+        }
+
+        h2 {
+            color: #0056b3;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 6px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            border-color: #007bff; /* Highlighted border when focused */
+            outline: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .specialization-info {
+            margin-top: 10px;
+            font-style: italic;
+            color: #007bff;
+        }
+
+        .doctor-names {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="appointment-container">
+        <h2>Book an Appointment</h2>
+        <form id="appointmentForm">
+            <label for="name">Patient Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="doctor">Select Doctor Type:</label>
+            <select id="doctor" required>
+                <option value="">Select a Doctor</option>
+                <option value="General Physician">General Physician</option>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Orthopedist">Orthopedist</option>
+            </select>
+
+            <div id="specialization" class="specialization-info"></div>
+
+            <div id="doctorNames" class="doctor-names"></div>
+
+            <label for="callType">Preferred Call Type:</label>
+            <select id="callType" required>
+                <option value="In-person">In-person</option>
+                <option value="Online">Online</option>
+            </select>
+
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="time">Select Time:</label>
+            <select id="time" required>
+                <option value="">Select a Time Slot</option>
+            </select>
+
+            <button type="submit">Confirm Appointment</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("doctor").addEventListener("change", function() {
+            const selectedDoctor = this.value;
+            const specializationDiv = document.getElementById("specialization");
+            const doctorNamesDiv = document.getElementById("doctorNames");
+            let specializationText = '';
+            let doctorNames = [];
+
+            // Display doctor specialization and doctor names based on selected type
+            switch (selectedDoctor) {
+                case "General Physician":
+                    specializationText = "General Physician: Provides general health advice and treatments for a variety of health issues.";
+                    doctorNames = ["Dr. Sharma", "Dr. Kumar"];
+                    break;
+                case "Dermatologist":
+                    specializationText = "Dermatologist: Specializes in skin conditions, including acne, eczema, and other dermatological concerns.";
+                    doctorNames = ["Dr. Verma", "Dr. Roy"];
+                    break;
+                case "Cardiologist":
+                    specializationText = "Cardiologist: Specializes in heart-related issues and cardiovascular diseases.";
+                    doctorNames = ["Dr. Mehta", "Dr. Jain"];
+                    break;
+                case "Orthopedist":
+                    specializationText = "Orthopedist: Focuses on musculoskeletal issues, including bones, joints, and muscles.";
+                    doctorNames = ["Dr. Singh", "Dr. Gupta"];
+                    break;
+                default:
+                    specializationText = '';
+                    doctorNames = [];
+            }
+
+            // Display specialization info
+            specializationDiv.textContent = specializationText;
+
+            // Display doctor names based on selected doctor type
+            const doctorDropdown = document.createElement("select");
+            doctorDropdown.id = "doctorName";
+            doctorDropdown.required = true;
+
+            const defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.textContent = "Select a Doctor";
+            doctorDropdown.appendChild(defaultOption);
+
+            doctorNames.forEach(doctor => {
+                const option = document.createElement("option");
+                option.value = doctor;
+                option.textContent = doctor;
+                doctorDropdown.appendChild(option);
+            });
+
+            // Clear existing doctor names dropdown and append new one
+            doctorNamesDiv.innerHTML = "<label for='doctorName'>Select Doctor:</label>";
+            doctorNamesDiv.appendChild(doctorDropdown);
+
+            // Reset time slots
+            const timeDropdown = document.getElementById("time");
+            timeDropdown.innerHTML = '<option value="">Select a Time Slot</option>';
+
+            // Dummy time slots
+            const timeSlots = ["10:00 AM", "11:30 AM", "2:00 PM", "4:00 PM"];
+            timeSlots.forEach(time => {
+                let option = document.createElement("option");
+                option.value = time;
+                option.textContent = time;
+                timeDropdown.appendChild(option);
+            });
+        });
+
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Appointment Confirmed! Thank you.");
+        });
+    </script>
+
+</body>
+</html>
