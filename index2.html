@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Management System</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #wrapper{
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 10px; 
+        }
+
+        .container{
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            z-index: -1;
+        }
+
+        .background{
+            transform: translateZ(-40px) scale(5);
+        }
+
+        .foreground{
+            transform: translateZ(-20px) scale(3);
+        }
+
+        .background, .foreground{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        h1{
+            position: absolute;
+            top: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: 2px;
+            font-size: 5rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        section{
+            background-color: rgb(45,45,45);
+            color: white;
+            padding: 5rem 0;
+        }
+
+        .bg1{
+            background-image: url(healthcare-1.jpg);
+        }
+
+        .bg2{
+            background-image: url(https://projectsfactory.in/wp-content/uploads/2022/08/IOT-patient-health-monitoring.jpg);
+        }
+
+        .secheading{
+            font-size: 3rem;
+            padding:0 10rem;
+        }
+
+        .text{
+            font-size: 1.5rem;
+            padding: 0 10rem;
+            margin: 5rem;
+        }
+
+        .bg{
+            position: relative;
+            width: 100%;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+        }
+
+        .desc{
+            position: absolute;
+            background-color: white;
+            padding: 0.5rem 2.5rem;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: black;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        .flex{
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <h2 id="loginpage">Login</h2>
+        <h2 id="packages">Services</h2>
+        <h2 id="feedbackform">Contact Us</h2>
+    </div>
+    <div id="wrapper">
+        <div class="container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/046/870/038/small_2x/professional-doctor-assistant-checking-medical-records-on-laptop-with-x-ray-and-medical-equipment-around-physician-working-in-hospital-clinic-making-appointments-and-analysing-patient-registration-photo.jpg" class="background">
+            <!-- <img src="healthcare-foreground.png" class="foreground"> -->
+            <h1>Health Management System</h1>
+        </div>
+
+        <section>
+            <h2 class="secheading">Our Healthcare Services</h2> 
+            <p class="text">
+                What We Offer: <br>
+                * Electronic Medical Records: Securely store and manage patient records digitally.<br>
+                * Online Appointments: Schedule consultations with doctors easily.<br>
+                * Health Tracking: Monitor vital health metrics and wellness programs.<br>
+                * 24/7 Telemedicine: Get remote medical assistance anytime, anywhere.<br>
+            </p>
+
+            <div class="bg bg1">
+                <h2 class="desc">Medical Consultation</h2>
+            </div>
+            <p class="text">
+                Our system connects patients with qualified healthcare professionals for remote and in-person consultations, ensuring timely medical attention.
+            </p>
+
+            <div class="bg bg2">
+                <h2 class="desc">Health Monitoring</h2>
+            </div>
+            <p class="text">
+                Keep track of your health metrics, including blood pressure, heart rate, and glucose levels, with our integrated monitoring tools.
+            </p>
+
+            <!-- <div class="bg bg3">
+                <h2 class="desc">Wellness Programs</h2>
+            </div>
+            <p class="text">
+                Join our customized wellness and fitness programs designed to improve your overall health and well-being.
+            </p> -->
+        </section>
+    </div>
+</body>
+</html>
