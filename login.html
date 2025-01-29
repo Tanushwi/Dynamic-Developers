@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        body
-        {
+        body {
             font-family: Arial, sans-serif;
-            background-image:url('https://wallpaperaccess.com/full/624121.jpg');
+            background-image: url('https://wallpaperaccess.com/full/624121.jpg');
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -17,9 +16,8 @@
             margin: 0;
         }
 
-        .login-container 
-        {
-            background-color: transparent;
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for better visibility */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
@@ -27,23 +25,20 @@
             text-align: center;
         }
 
-        h1 
-        {
+        h1 {
             color: #333;
             margin-bottom: 20px;
         }
 
-        label 
-        {
+        label {
             display: block;
             font-weight: bold;
             margin: 10px 0 5px;
             text-align: left;
         }
 
-        input
-        {
-            width: 300px;
+        input {
+            width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -51,8 +46,7 @@
             font-size: 16px;
         }
 
-        .forgot-password 
-        {
+        .forgot-password {
             font-size: 14px;
             color: #007bff;
             cursor: pointer;
@@ -60,13 +54,11 @@
             display: block;
         }
 
-        .forgot-password:hover 
-        {
+        .forgot-password:hover {
             text-decoration: underline;
         }
 
-        button
-        {
+        button {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -77,39 +69,62 @@
             cursor: pointer;
         }
 
-        button:hover
-        {
+        button:hover {
             background-color: #0056b3;
         }
 
-        .signup
-        {
+        .signup {
             margin-top: 10px;
             font-size: 14px;
         }
 
-        .signup a
-        {
+        .signup a {
             color: #007bff;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .signup a:hover 
-        {
+        .signup a:hover {
             text-decoration: underline;
         }
     </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginButton = document.getElementById("login-button");
+
+            loginButton.addEventListener("click", function (event) {
+                event.preventDefault(); 
+
+                let enteredEmail = document.getElementById("email").value;
+                let enteredPassword = document.getElementById("password").value;
+
+                let storedUser = JSON.parse(localStorage.getItem("user"));
+
+                if (!storedUser) {
+                    alert("No user found! Please sign up first.");
+                    return;
+                }
+
+                if (enteredEmail === storedUser.email && enteredPassword === storedUser.password) {
+                    alert("Login successful! Redirecting...");
+                    window.location.href = "index2.html"; 
+                } else {
+                    alert("Invalid email or password. Please try again.");
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Enter your password">
         <a class="forgot-password">Forgot Password?</a>
-        <button>Login</button>
+        <button id="login-button">Login</button>
         <p class="signup">Don't have an account? <a href="SignUp.html">Sign Up</a></p>
     </div>
 </body>
